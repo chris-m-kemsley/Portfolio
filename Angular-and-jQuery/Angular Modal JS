@@ -34,3 +34,19 @@
                 console.error(error);
             }
         }
+        
+        
+        sabio.ng.addController(sabio.ng.app.module
+            , "$modalController"
+            , ['$scope', '$modalInstance', 'items', '$userSettingService']
+            , sabio.page.modalControllerFactory);
+            
+            sabio.ng.addService(sabio.ng.app.module
+            , "$userSettingService"
+            , ["$baseService"]
+            , sabio.services.modalFactory);
+
+        sabio.ng.addController(sabio.ng.app.module
+            , "$dashboardController"
+            , ['$scope', '$baseController', '$uibModal', '$userSettingService', '$contactService', '$dashboardSidebar', '$alertService']
+            , sabio.page.dashboardControllerFactory);
