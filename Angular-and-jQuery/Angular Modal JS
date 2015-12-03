@@ -1,0 +1,36 @@
+ sabio.page.modalControllerFactory = function ($scope, $modalInstance, items, $userSettingService) {
+            var vm = this;
+            vm.$scope = $scope;
+            vm.items = items;
+            vm.settingId = null;
+            vm.settingValue = null;
+            vm.submitData = _submitData;
+            vm.modalInstance = $modalInstance;
+            vm.$userSettingService = $userSettingService;
+            vm.changedSetting = _changedSetting;
+            vm.onSettingError = _onSettingError
+            vm.selected = {
+                item: vm.items[0]
+            }
+
+            vm.cancel = function () {
+                $modalInstance.close();
+            }
+
+            function _submitData(settingId, value) {
+                var settingData = {};
+
+                settingData.settingId = settingId;
+                settingData.settingValue = value;
+
+                vm.$userSettingService.put(settingData, vm.changedSetting, vm.onSettingError);
+            }
+
+            function _changedSetting() {
+                console.log("success");
+            }
+
+            function _onSettingError(jqXhr, error) {
+                console.error(error);
+            }
+        }
